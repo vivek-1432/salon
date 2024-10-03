@@ -3,36 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unisex Salon</title>
+    <title>Pharmacy Website</title>
+    
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #fbfbfc;
+            scroll-behavior: smooth;
         }
-        .container {
-            margin-top: 50px;
+
+        /* Navbar Styles */
+        .navbar {
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(1, 196, 245, 0.3);
+            margin: 0;
+            border: 1px solid rgb(47, 0, 255);
         }
-        a {
+
+        .logo img {
+            width: 120px;
+            height: 80px;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
             text-decoration: none;
-            padding: 15px 30px;
-            background-color: #5cb85c;
-            color: white;
-            border-radius: 5px;
-            margin: 10px;
-            display: inline-block;
+            color: #03d5fa;
+            padding: 8px 15px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+            border-radius: 30px;
         }
-        a:hover {
-            background-color: #4cae4c;
+
+        .nav-links a:hover {
+            background-color: transparent;
+            border: 2px solid #a855f7;
+            color: #f8192b;
+        }
+        .shortcut {
+            list-style-type: none;
+            margin: 0;
+            padding-left: 35px;
+            padding-top: 10px;
+            display: flex;
+            gap: 35px;
+        }
+
+        /* Container Styles */
+        .section-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(1, 208, 245, 0.623);
+            border: 1px solid rgb(0, 38, 255);
+            border-left: none;
+            border-right: none;
+        }
+
+
+        .section-text {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .section-text h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-decoration: underline;
+        }
+
+        .section-text p {
+            font-size: 16px;
+            line-height: 1.6;
+            display: none; /* Initially hidden */
+        }
+
+        /* Show only the first line */
+        .section-text p {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal; /* Allows wrapping */
+        }
+
+
+        .read-more {
+            color: blue;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        /* Transparent Container with enhanced styles */
+        .custom-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: rgb(252, 251, 251); /* Slightly more opaque for contrast */
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(1, 191, 248, 0.938);
+            backdrop-filter: blur(10px);
+            margin-top: 40px;
+            position: relative;
+            border-radius: 12px; /* Add border radius for smoother edges */
+        }
+
+        /* New Section Content Style */
+        .new-section-content {
+            width: 30%;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: block; /* Make the link a block element */
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit text color */
+            border-radius: 12px; /* Round the corners */
+            overflow: hidden; /* Ensure content stays within rounded borders */
+            transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition effects */
+        }
+
+        .new-section-content:hover {
+            background-color: rgba(13, 213, 240, 0.8); /* Slightly darker hover effect */
+            transform: translateY(-5px); /* Lift the card on hover */
+            box-shadow: 0 8px 30px rgb(2, 192, 250); /* More prominent shadow on hover */
+        }
+
+        .new-section-content img {
+            width: 100%;
+            height: auto;
+            border-bottom: 4px solid #1abc9c; /* Accent border for image */
+            transition: transform 0.3s; /* Smooth zoom effect on image */
+        }
+
+        .new-section-content img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Section Headings and Text */
+        .new-section-content h3 {
+            margin: 15px 0;
+            font-size: 1.8rem; /* Larger font size for headings */
+            color: #9e05f7; /* Darker color for better readability */
+        }
+
+        /* blue line between sections */
+        .section {
+            position: relative;
+        }
+
+        /* Improved line styling */
+        .section + .section::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: rgb(2, 192, 250); /* Use a cohesive color with the overall theme */
+            z-index: 1;
+        }
+
+        /* Align the last section to the far right */
+        .custom-container .section:last-child {
+            margin-left: auto;
+        }
+
+
+
+        /* Container Image Height */
+        .section-image img {
+            width: 400px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        /* Footer Styles */
+        footer {
+            background-image: linear-gradient(rgb(255, 255, 255), rgba(5, 5, 5, 0.541));
+            color: #333;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding-bottom: 20px;
+        }
+
+        footer .footer-links div {
+            flex: 1 1 200px;
+            margin: 15px;
+        }
+
+        footer .footer-links a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        footer .footer-links a:hover {
+            color: #fc4b05;
+        }
+
+        footer .social-icons {
+            margin-top: 20px;
+        }
+
+        footer .social-icons a {
+            color: #05daf7;
+            font-size: 25px;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: #fa0303;
+        }
+
+        footer .copyright {
+            margin-top: 20px;
+            color: #0a0a0a;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Our Unisex Salon</h1>
-    <p>Please choose your section</p>
-    <div class="container">
-        <a href="male.html">Male Section</a>
-        <a href="female.html">Female Section</a>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="medical.html">
+                    <img src="pharmacy-logo.jpg" alt="Pharmacy Logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="locations.html">Locations</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+            <ul class="shortcut">
+                <li><a href="news.html">News>...</a></li>
+                <li><a href="leader.html">Leadership>...</a></li>
+                <li><a href="careers.html">Careers>...</a></li>
+                <li><a href="investor.html">Investors>...</a></li>
+            </ul>
+
+    <main>
+        <section id="home" class="section">
+            <div class="section-content" style="align-items: center;">
+                <div class="section-text">
+                    <h1>Welcome to Our Pharmacy</h1>
+                    <p>
+                        At our pharmacy, we are committed to providing you with exceptional service and quality 
+                        healthcare products. Our dedicated team of professionals is here to support your health 
+                        and wellness needs. We understand that each individual is unique, and we take the time 
+                        to listen and address your specific concerns. Whether you need prescription medications, 
+                        over-the-counter remedies, or health consultations, we strive to create a welcoming environment
+                        where you feel valued and cared for.Our pharmacy is equipped with a wide range of products,
+                        including vitamins, supplements, personal care items, and specialized healthcare solutions. 
+                        We believe in empowering our customers with knowledge and resources to make informed decisions
+                        about their health. We invite you to explore our services, take advantage of our expert
+                        advice, and experience the difference at our pharmacy. Thank you for choosing us as your
+                        trusted partner in health!
+                    </p>
+                    <span class="read-more" onclick="toggleReadMore(this)">Read More...</span>
+                </div>
+                <div style="width: 2px; height: 200px; background-color: rgb(0, 238, 255); margin: 0 20px;"></div>
+                <div class="section-image">
+                    <img src="home-image.jpg" alt="Pharmacy Storefront">
+                </div>
+            </div>
+            
+
+            <div class="section-content" style="align-items: center;">
+                <div class="section-text">
+                    <h1>Health Sevvices</h1>
+                    <p>
+                        Welcome to Health Services! We are dedicated to providing you with exceptional care and
+                        support for your health and wellness needs. Our team of experienced professionals is 
+                        committed to delivering comprehensive services that cater to your individual requirements. 
+                        Whether you're seeking preventive care, treatment for an existing condition, or guidance
+                        on maintaining a healthy lifestyle, we are here to assist you every step of the way. Our
+                        state-of-the-art facilities and innovative practices ensure that you receive the highest
+                        quality of care in a comfortable environment. Thank you for choosing us as your trusted
+                        partner in health. Your well-being is our top priority!
+                    </p>
+                    <span class="read-more" onclick="toggleReadMore(this)">Read More...</span>
+                </div>
+                <div style="width: 2px; height: 200px; background-color: rgb(0, 225, 255); margin: 0 20px;"></div>
+                <div class="section-image">
+                    <img src="helth_sevice.jpg" alt="Pharmacy Storefront">
+                </div>
+            </div>
+            
+
+            <div class="section-content" style="align-items: center;">
+                <div class="section-text">
+                    <h1>Why Us?</h1>
+                    <p>
+                        At our pharmacy, we are committed to providing exceptional care and services tailored to meet 
+                        your healthcare needs. We take pride in offering a wide range of high-quality medications, 
+                        over-the-counter products, and wellness items to ensure that you have access to everything 
+                        you need in one place. Our experienced pharmacists are always available to provide personalized 
+                        advice, ensuring that you understand your medications and feel confident in your treatment plan. 
+                        We prioritize convenience and offer easy prescription refills, fast delivery options, and 
+                        competitive pricing. With a customer-first approach, we strive to build lasting relationships 
+                        based on trust, reliability, and a genuine commitment to your well-being.
+                    </p>
+                    <span class="read-more" onclick="toggleReadMore(this)">Read More...</span>
+                </div>
+                <div style="width: 2px; height: 200px; background-color: rgb(0, 255, 255); margin: 0 20px;"></div>
+                <div class="section-image">
+                    <img src="why us.jpg" alt="Pharmacy Storefront">
+                </div>
+            </div>
+            
+            
+        </section>
+    </main>
+    <div class="custom-container">
+        <div class="section">
+            <a href="purpose.html" class="new-section-content">
+                <img src="role.jpg" alt="Pharmacy Purpose Image">
+                <h3>Our Purpose</h3>
+            </a>
+        </div>
+        <div class="section">
+            <a href="role.html" class="new-section-content">
+                <img src="role.jpg" alt="Role in Pharmacy Image">
+                <h3>Our Role</h3>
+            </a>
+        </div>
+        <div class="section">
+            <a href="future.html" class="new-section-content">
+                <img src="role.jpg" alt="Future with Pharmacy Image">
+                <h3>Our Future</h3>
+            </a>
+        </div>
     </div>
+    
+    
+    
+    
+
+    <footer>
+        <h3>Healthier Happens Together™</h3>
+
+        <div class="footer-links">
+            <div>
+                <h4>Quick Links</h4>
+                <a href="news.html">News</a>
+                <a href="leader.html">Leadership</a>
+                <a href="careers.html">Careers</a>
+                <a href="investor.html">Investors</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <a href="https://en.wikipedia.org/wiki/COVID-19">COVID-19</a>
+                <a href="service.html">Health Care and Wellness</a>
+                <a href="drug.html">Prescription Drug Coverage</a>
+                <a href="helth.html">Health Insurance</a>
+                <a href="medical.html">Pharmacy</a>
+            </div>
+            <div>
+                <h4>Impact</h4>
+                <a href="initiative.html">Initiatives</a>
+                <a href="policies.html">Company Policies</a>
+                <a href="responce.html">Our Opioid Response</a>
+                <a href="political.html">Political Contributions</a>
+                <a href="disclousers.html">Disclosures</a>
+            </div>
+            <div>
+                <h4>More Info</h4>
+                <a href="accessibility.html">Accessibility</a>
+                <a href="privacy.html">Privacy Center</a>
+                <a href="locations.html">Site Map</a>
+                <a href="term.html">Terms of Use</a>
+                <a href="code.html">Code of Conduct</a>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+
+        <div class="copyright">
+            <p>© Copyright 1999 - 2024 CVS Health</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleReadMore(button) {
+            const paragraph = button.previousElementSibling;
+
+            // Toggle full paragraph display
+            if (paragraph.style.display === "none" || !paragraph.style.display) {
+                paragraph.style.display = "block";
+                button.textContent = "Read Less";
+            } else {
+                paragraph.style.display = "none";
+                button.textContent = "Read More";
+            }
+        }
+    </script>
 </body>
 </html>
